@@ -113,6 +113,18 @@ resource "aws_lb" "main" {
     Environment = "${var.component}-${var.env}"
   }
 }
+
+resource "aws_lb_listener" "front_end" {
+  load_balancer_arn = aws_lb.main.arn
+  port              = var.lb["port"]
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.main.arn
+  }
+}
+
 resource "aws_route53_record" "dns" {
   zone_id = data.aws_route53_zone.main.zone_id
   name    = "${var.component}-${var.env}"
