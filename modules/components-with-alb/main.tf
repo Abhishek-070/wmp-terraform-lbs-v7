@@ -2,7 +2,7 @@ resource "aws_security_group" "instance" {
 
   name = "${var.component}-${var.env}-instance"
 
-   egress {
+   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "TCP"
