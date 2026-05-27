@@ -100,6 +100,7 @@ resource "aws_lb_target_group" "main" {
     unhealthy_threshold = 2
     interval = 5
     timeout = 2
+    matcher = "200,403"
   }
 }
 resource "aws_lb" "main" {
